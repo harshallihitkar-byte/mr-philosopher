@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mr Philosopher — Ancient wisdom for the modern mind</title>
+  <meta name="description" content="A weekly philosophy newsletter. Timeless ideas, practical wisdom, and reflections from the world’s greatest thinkers — delivered every week.">
+  <meta name="author" content="Harshal J. Lihitkar">
+  <meta name="theme-color" content="#f7f4f0">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mr Philosopher — A weekly philosophy newsletter">
+  <meta property="og:description" content="Ancient wisdom for the modern mind. Join the thinkers’ circle and receive weekly reflections in your inbox.">
+  <!-- Update og:image to the absolute GitHub Pages URL once the site is live. -->
+  <meta property="og:image" content="https://harshallihitkar-byte.github.io/mr-philosopher/hero-philosopher.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mr Philosopher — A weekly philosophy newsletter">
+  <meta name="twitter:description" content="Ancient wisdom for the modern mind. Join the thinkers’ circle and receive weekly reflections in your inbox.">
+  <meta name="twitter:image" content="https://harshallihitkar-byte.github.io/mr-philosopher/hero-philosopher.jpg">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preload" as="image" href="hero-philosopher.jpg">
+  <style>
+    /* Self-hosted Latin cuts so typography holds up offline and in headless previews. */
+    @font-face {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url("poppins-normal-500-latin.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url("poppins-normal-700-latin.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 800;
+      font-display: swap;
+      src: url("poppins-normal-800-latin.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Poppins";
+      font-style: italic;
+      font-weight: 600;
+      font-display: swap;
+      src: url("poppins-italic-600-latin.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("inter-normal-400-latin.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url("inter-normal-500-latin.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url("inter-normal-600-latin.woff2") format("woff2");
+    }
+
+    :root {
+      --bg: #f7f4f0;
+      --fg: #161513;
+      --muted: #eeece9;
+      --muted-fg: #676767;
+      --card: #ffffff;
+      --accent: #7a9d7e;
+      --accent-soft: rgba(122, 157, 126, 0.12);
+      --cta: #fa686a;
+      --cta-fg: #ffffff;
+      --border: #e3e1de;
+      --ring: #7a9d7e;
+      --display: "Poppins", ui-sans-serif, system-ui, sans-serif;
+      --sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+      --radius: 16px;
+      --shadow: 0 1px 2px rgba(22, 21, 19, 0.04);
+      --nav-h: 72px;
+      --max: 1200px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 12px); }
+    body {
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    .skip {
+      position: absolute; left: 16px; top: -40px; z-index: 100;
+      background: var(--fg); color: #fff; padding: 8px 14px; border-radius: 999px;
+    }
+    .skip:focus { top: 12px; }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: sticky; top: 0; z-index: 40;
+      height: var(--nav-h);
+      background: rgba(247, 244, 240, 0.86);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .nav.scrolled {
+      border-bottom-color: var(--border);
+      box-shadow: 0 8px 24px rgba(22, 21, 19, 0.04);
+    }
+    .nav-inner {
+      max-width: var(--max);
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.125rem;
+      letter-spacing: -0.025em;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .brand-mark {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: var(--accent); color: var(--bg);
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .brand-mark svg { width: 16px; height: 16px; }
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 36px;
+    }
+    .nav-links a {
+      font-size: 0.9375rem;
+      color: var(--muted-fg);
+      transition: color 0.15s ease;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      background: var(--cta);
+      color: var(--cta-fg);
+      font-weight: 500;
+      font-size: 0.9375rem;
+      letter-spacing: 0.01em;
+      transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+    }
+    .btn:hover { transform: scale(1.03); filter: brightness(0.96); }
+    .btn:active { transform: scale(0.99); }
+    .btn:focus-visible, .input:focus-visible, .icon-btn:focus-visible, .nav-links a:focus-visible, .email-link:focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: 2px;
+    }
+    .btn-sm { height: 40px; padding: 0 20px; }
+    .btn-lg { height: 48px; padding: 0 28px; min-width: 132px; }
+    .btn.nav-cta { display: none; }
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px; height: 40px;
+      border: 0; background: transparent;
+      border-radius: 999px;
+      color: var(--fg);
+      cursor: pointer;
+    }
+    .icon-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-btn svg.is-hidden { display: none; }
+
+    .mobile-panel {
+      display: none;
+      border-top: 1px solid var(--border);
+      background: rgba(247, 244, 240, 0.96);
+      backdrop-filter: blur(14px);
+    }
+    .mobile-panel.open { display: block; }
+    .mobile-panel-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-panel a {
+      display: block;
+      padding: 12px 8px;
+      font-size: 1.05rem;
+      border-radius: 10px;
+    }
+    .mobile-panel a:hover { color: var(--accent); }
+    .mobile-panel .btn { width: 100%; height: 44px; margin-top: 8px; }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 48px 0 56px;
+    }
+    .dots, .dots-soft {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(17, 17, 17, 0.08) 1px, transparent 1px);
+      background-size: 20px 20px;
+      opacity: 0.35;
+    }
+    .dots-soft {
+      opacity: 0.4;
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    }
+    .wrap {
+      position: relative;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: center;
+      gap: 48px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted-fg);
+    }
+    .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .hero h1 {
+      margin-top: 22px;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 44px;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: var(--fg);
+    }
+    .hero h1 .accent { color: var(--accent); }
+    .lede {
+      margin-top: 22px;
+      max-width: 520px;
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: var(--muted-fg);
+    }
+    .signup {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 520px;
+    }
+    .input {
+      height: 48px;
+      flex: 1;
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 999px;
+      padding: 0 20px;
+      font-size: 16px;
+      color: var(--fg);
+      min-width: 0;
+    }
+    .input::placeholder { color: #9a9a9a; }
+    .form-note {
+      margin-top: 8px;
+      font-size: 0.875rem;
+      color: var(--muted-fg);
+    }
+    .form-note:empty { display: none; }
+    .form-note.ok { color: #3d6b48; }
+    .form-note.err { color: #b42318; }
+
+    .portrait-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      aspect-ratio: 4 / 5;
+    }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(48px);
+    }
+    .orb-a { left: -24px; top: -24px; width: 160px; height: 160px; background: rgba(122, 157, 126, 0.18); }
+    .orb-b { right: -32px; bottom: 40px; width: 192px; height: 192px; background: rgba(250, 104, 106, 0.16); filter: blur(64px); }
+    .portrait {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; }
+    .float-card {
+      display: none;
+      position: absolute;
+      right: -12px;
+      top: 40px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px 16px;
+      box-shadow: 0 10px 30px rgba(22, 21, 19, 0.08);
+      z-index: 2;
+    }
+    .float-card strong {
+      display: block;
+      font-family: var(--display);
+      font-size: 1.125rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+    }
+    .float-card span {
+      display: block;
+      margin-top: 2px;
+      font-size: 0.6875rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+    }
+
+    /* ---------- HONEST BADGES ---------- */
+    .badges {
+      padding: 8px 0 56px;
+    }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 14px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 18px 10px 14px;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--fg);
+      letter-spacing: 0.01em;
+    }
+    .badge svg {
+      width: 16px; height: 16px;
+      stroke: var(--accent); fill: none;
+      stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* ---------- SECTIONS ---------- */
+    section { padding: 64px 0; }
+    .center { text-align: center; margin: 0 auto; max-width: 42rem; }
+    .kicker {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    h2 {
+      margin-top: 10px;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.875rem;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      color: var(--fg);
+    }
+    .sub {
+      margin-top: 14px;
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: var(--muted-fg);
+    }
+
+    .offer-grid {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .offer {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: background 0.25s ease;
+    }
+    .offer:hover { background: var(--muted); }
+    .offer-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .offer-icon svg {
+      width: 20px; height: 20px;
+      stroke: currentColor; fill: none;
+      stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .offer h3 {
+      margin-top: 18px;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.125rem;
+      letter-spacing: -0.025em;
+      line-height: 1.25;
+    }
+    .offer p {
+      margin-top: 8px;
+      font-size: 0.9375rem;
+      line-height: 1.65;
+      color: var(--muted-fg);
+    }
+
+    /* ---------- ABOUT ---------- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: center;
+      gap: 40px;
+    }
+    .about-copy p + p { margin-top: 16px; }
+    .about-copy p {
+      font-size: 1.0625rem;
+      line-height: 1.75;
+      color: var(--muted-fg);
+    }
+    .quote-wrap { position: relative; }
+    .quote-glow {
+      position: absolute;
+      inset: -24px;
+      z-index: -1;
+      border-radius: 36px;
+      background: var(--accent-soft);
+      filter: blur(32px);
+    }
+    blockquote.quote-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 32px 28px;
+    }
+    .quote-card .q-icon { color: var(--accent); }
+    .quote-card .q-icon svg {
+      width: 24px; height: 24px;
+      stroke: currentColor; fill: none;
+      stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .quote-card p {
+      margin-top: 18px;
+      font-family: var(--display);
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1.5rem;
+      line-height: 1.375;
+      letter-spacing: -0.025em;
+      color: var(--fg);
+    }
+    .quote-card footer {
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.875rem;
+      color: var(--muted-fg);
+      font-style: normal;
+    }
+    .quote-card footer::before {
+      content: "";
+      width: 32px; height: 1px;
+      background: var(--border);
+    }
+
+    /* ---------- CTA BAND ---------- */
+    .cta-band {
+      padding: 24px 24px 80px;
+    }
+    .cta-panel {
+      position: relative;
+      overflow: hidden;
+      max-width: 1080px;
+      margin: 0 auto;
+      border-radius: 32px;
+      border: 1px solid var(--border);
+      background: var(--accent-soft);
+      padding: 56px 24px;
+      text-align: center;
+    }
+    .cta-panel .inner { position: relative; max-width: 40rem; margin: 0 auto; }
+    .cta-panel h2 { font-size: 1.875rem; }
+    .cta-panel .signup { margin: 28px auto 0; max-width: 540px; }
+    .cta-alt {
+      margin-top: 18px;
+      font-size: 0.8125rem;
+      color: var(--muted-fg);
+    }
+    .email-link {
+      color: var(--fg);
+      text-decoration: none;
+      text-underline-offset: 4px;
+    }
+    .email-link:hover { color: var(--accent); text-decoration: underline; }
+
+    /* ---------- FOOTER ---------- */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0 48px;
+    }
+    .foot-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      text-align: center;
+    }
+    .foot-brand {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: -0.025em;
+    }
+    .foot-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; }
+    .foot-links a, .foot-mail {
+      font-size: 0.9375rem;
+      color: var(--muted-fg);
+      transition: color 0.15s ease;
+    }
+    .foot-links a:hover, .foot-mail:hover { color: var(--accent); }
+    .copy {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted-fg);
+    }
+
+    @media (min-width: 640px) {
+      .hero h1 { font-size: 3rem; }
+      h2 { font-size: 2.25rem; }
+      .cta-panel h2 { font-size: 2.25rem; }
+      .quote-card p { font-size: 1.875rem; }
+      .signup { flex-direction: row; align-items: stretch; }
+      .float-card { display: block; }
+      .offer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 768px) {
+      :root { --nav-h: 80px; }
+      .nav-links { display: flex; }
+      .btn.nav-cta { display: inline-flex; }
+      .icon-btn { display: none; }
+      .mobile-panel { display: none !important; }
+    }
+    @media (min-width: 900px) {
+      .hero { padding: 56px 0 72px; }
+      .hero-grid {
+        grid-template-columns: 1.05fr 1fr;
+        gap: 64px;
+      }
+      .hero h1 { font-size: 64px; }
+      .lede { font-size: 1.125rem; }
+      .float-card { right: -16px; top: 40px; }
+      .offer-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+      .about-grid { grid-template-columns: 1fr 1fr; gap: 80px; }
+      h2 { font-size: 44px; }
+      .cta-panel { padding: 80px 48px; }
+      .cta-panel h2 { font-size: 48px; }
+      .quote-card { padding: 40px; }
+      .quote-card p { font-size: 1.875rem; }
+      section { padding: 88px 0; }
+      .badges { padding: 8px 0 24px; }
+      .foot-row {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+        align-items: center;
+      }
+    }
+    @media (max-width: 639px) {
+      .hero { padding: 32px 0 32px; }
+      .hero-grid { gap: 28px; }
+      .portrait-wrap { max-width: 300px; }
+      .badges { padding: 2px 0 20px; }
+      section { padding: 40px 0; }
+      .offer-grid { margin-top: 36px; }
+      .offer { padding: 20px; }
+      .cta-band { padding: 4px 20px 40px; }
+      .cta-panel { padding: 40px 20px; }
+      .site-footer { padding: 28px 0 32px; }
+      blockquote.quote-card { padding: 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn, .nav, .offer { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#home">Skip to content</a>
+
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#home">
+        <img class="brand-mark" src="favicon.svg" width="28" height="28" alt="">
+        Mr Philosopher
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#home">Home</a>
+        <a href="#services">Philosophy</a>
+        <a href="#newsletter">Newsletter</a>
+        <a href="#about">About</a>
+      </nav>
+      <a class="btn btn-sm nav-cta" href="#newsletter">Subscribe</a>
+      <button class="icon-btn" type="button" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobilePanel">
+        <svg id="iconMenu" viewBox="0 0 24 24"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+        <svg id="iconClose" class="is-hidden" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+    <div class="mobile-panel" id="mobilePanel">
+      <div class="mobile-panel-inner">
+        <a href="#home">Home</a>
+        <a href="#services">Philosophy</a>
+        <a href="#newsletter">Newsletter</a>
+        <a href="#about">About</a>
+        <a class="btn" href="#newsletter">Subscribe</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="dots" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow"><span class="dot"></span>A weekly philosophy newsletter</span>
+            <h1>
+              Ancient <span class="accent">wisdom</span><br>
+              for the <span class="accent">modern</span><br>
+              mind.
+            </h1>
+            <p class="lede">Weekly philosophy insights, timeless ideas, and practical wisdom inspired by the world’s greatest thinkers.</p>
+            <form class="signup" data-signup novalidate aria-label="Subscribe to the newsletter">
+              <label class="sr-only" for="hero-email">Email address</label>
+              <input class="input" id="hero-email" name="email" type="email" autocomplete="email" maxlength="255" required placeholder="Enter your email">
+              <button class="btn btn-lg" type="submit">Subscribe</button>
+            </form>
+            <p class="form-note" role="status"></p>
+          </div>
+          <div class="portrait-wrap">
+            <div class="orb orb-a" aria-hidden="true"></div>
+            <div class="orb orb-b" aria-hidden="true"></div>
+            <div class="portrait">
+              <img src="hero-philosopher.jpg" width="800" height="1024" alt="Classical marble bust of a bearded philosopher, lit from the side against a warm backdrop.">
+            </div>
+            <div class="float-card">
+              <strong>Every Sunday</strong>
+              <span>A five-minute letter</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="badges" aria-label="What to expect">
+      <div class="wrap">
+        <div class="badge-row">
+          <span class="badge">
+            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 3v4"/><path d="M16 3v4"/></svg>
+            Every Sunday
+          </span>
+          <span class="badge">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            5-minute read
+          </span>
+          <span class="badge">
+            <svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M8 7h6a3 3 0 0 1 0 6H8"/><path d="M8 13h7a3 3 0 0 1 0 6H8"/></svg>
+            Free forever
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <section id="services" aria-labelledby="services-heading">
+      <div class="wrap">
+        <div class="center">
+          <p class="kicker">Offerings</p>
+          <h2 id="services-heading">What Mr Philosopher Offers</h2>
+          <p class="sub">A calm, considered space for ideas that endure — and tools to bring them into your week.</p>
+        </div>
+        <div class="offer-grid">
+          <article class="offer">
+            <div class="offer-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+            </div>
+            <h3>Weekly Newsletter</h3>
+            <p>Receive thoughtful essays every week.</p>
+          </article>
+          <article class="offer">
+            <div class="offer-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/></svg>
+            </div>
+            <h3>Practical Wisdom</h3>
+            <p>Apply timeless philosophy to daily life.</p>
+          </article>
+          <article class="offer">
+            <div class="offer-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></svg>
+            </div>
+            <h3>Reading Recommendations</h3>
+            <p>Discover influential philosophical works.</p>
+          </article>
+          <article class="offer">
+            <div class="offer-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            <h3>Deep Thinking Community</h3>
+            <p>Join meaningful conversations.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" aria-labelledby="about-heading">
+      <div class="wrap">
+        <div class="about-grid">
+          <div>
+            <p class="kicker">About</p>
+            <h2 id="about-heading">Why Mr Philosopher?</h2>
+            <div class="about-copy" style="margin-top: 22px;">
+              <p>Mr Philosopher is a quiet weekly letter for people who still believe ideas matter. Each issue draws on the world’s enduring thinkers — Stoics, Existentialists, Eastern sages — and translates their insight into something usable now.</p>
+              <p>The mission is simple: to make ancient wisdom feel close, modern, and practical without flattening its depth. No noise. No hype. Just clear writing for curious minds.</p>
+            </div>
+          </div>
+          <div class="quote-wrap">
+            <div class="quote-glow" aria-hidden="true"></div>
+            <blockquote class="quote-card">
+              <div class="q-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>
+              </div>
+              <p>“He who thinks deeply lives differently.”</p>
+              <footer>A guiding principle of Mr Philosopher</footer>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-band" id="newsletter" aria-labelledby="cta-heading">
+      <div class="cta-panel">
+        <div class="dots-soft" aria-hidden="true"></div>
+        <div class="inner">
+          <p class="kicker">The Letter</p>
+          <h2 id="cta-heading">Join the thinkers’ circle.</h2>
+          <p class="sub">Receive weekly reflections and timeless ideas directly in your inbox.</p>
+          <form class="signup" data-signup novalidate aria-label="Subscribe to the newsletter">
+            <label class="sr-only" for="cta-email">Email address</label>
+            <input class="input" id="cta-email" name="email" type="email" autocomplete="email" maxlength="255" required placeholder="Enter your email">
+            <button class="btn btn-lg" type="submit">Subscribe Now</button>
+          </form>
+          <p class="form-note" role="status"></p>
+          <p class="cta-alt">Or write to <a class="email-link" href="mailto:mrphilosopher.letter@gmail.com">mrphilosopher.letter@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-row">
+        <a class="foot-brand" href="#home">Mr Philosopher</a>
+        <nav class="foot-links" aria-label="Footer">
+          <a href="#home">Home</a>
+          <a href="#newsletter">Newsletter</a>
+          <a href="#about">About</a>
+        </nav>
+        <a class="foot-mail" href="mailto:mrphilosopher.letter@gmail.com">mrphilosopher.letter@gmail.com</a>
+      </div>
+      <p class="copy">© <span id="year">2026</span> Mr Philosopher. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    /*
+     * Newsletter signup
+     * -----------------
+     * Set NEWSLETTER_ACTION to your provider's form endpoint when you are ready
+     * to collect addresses. Leave it empty until then; the form stays on the
+     * page and shows a short "subscriptions open soon" note after a valid email.
+     *
+     * Buttondown:
+     *   https://buttondown.com/api/emails/embed-subscribe/YOUR-USERNAME
+     *   Input name: email
+     *
+     * Beehiiv:
+     *   Use the action URL from your publication's embed snippet
+     *   (Grow → Subscribe form / Embed). Input name is usually email.
+     *
+     * When the value is set, both forms POST to that URL in a new tab
+     * (or the same tab, if you change the target).
+     */
+    var NEWSLETTER_ACTION = "";
+
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function closestNote(form) {
+      var el = form.nextElementSibling;
+      if (el && el.className.indexOf("form-note") !== -1) return el;
+      return form.querySelector(".form-note");
+    }
+
+    function showNote(form, kind, text) {
+      var note = closestNote(form);
+      if (!note) return;
+      note.className = "form-note" + (kind ? " " + kind : "");
+      note.textContent = text;
+    }
+
+    function onSignup(event) {
+      var form = event.currentTarget;
+      var input = form.querySelector('input[name="email"]');
+      var email = (input && input.value ? input.value : "").trim();
+
+      if (!emailPattern.test(email)) {
+        event.preventDefault();
+        showNote(form, "err", "Please enter a valid email address.");
+        if (input) input.focus();
+        return;
+      }
+
+      if (!NEWSLETTER_ACTION) {
+        event.preventDefault();
+        showNote(form, "ok", "Thanks — subscriptions open soon.");
+        form.reset();
+        return;
+      }
+
+      form.action = NEWSLETTER_ACTION;
+      form.method = "post";
+      form.target = "_blank";
+    }
+
+    var forms = document.querySelectorAll("[data-signup]");
+    var i;
+    for (i = 0; i < forms.length; i++) {
+      forms[i].addEventListener("submit", onSignup);
+    }
+
+    var nav = document.getElementById("nav");
+    var menuBtn = document.getElementById("menuBtn");
+    var panel = document.getElementById("mobilePanel");
+    var iconMenu = document.getElementById("iconMenu");
+    var iconClose = document.getElementById("iconClose");
+    var menuOpen = false;
+
+    function setMenu(open) {
+      menuOpen = open;
+      if (open) {
+        panel.className = "mobile-panel open";
+        menuBtn.setAttribute("aria-expanded", "true");
+        menuBtn.setAttribute("aria-label", "Close menu");
+        iconMenu.classList.add("is-hidden");
+        iconClose.classList.remove("is-hidden");
+      } else {
+        panel.className = "mobile-panel";
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.setAttribute("aria-label", "Open menu");
+        iconClose.classList.add("is-hidden");
+        iconMenu.classList.remove("is-hidden");
+      }
+    }
+
+    menuBtn.addEventListener("click", function () {
+      setMenu(!menuOpen);
+    });
+
+    var panelLinks = panel.querySelectorAll("a");
+    for (i = 0; i < panelLinks.length; i++) {
+      panelLinks[i].addEventListener("click", function () { setMenu(false); });
+    }
+
+    function onScroll() {
+      if (window.scrollY > 8) nav.classList.add("scrolled");
+      else nav.classList.remove("scrolled");
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    var yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+  </script>
+</body>
+</html>
