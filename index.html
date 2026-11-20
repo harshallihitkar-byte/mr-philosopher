@@ -858,7 +858,7 @@
      * When the value is set, both forms POST to that URL in a new tab
      * (or the same tab, if you change the target).
      */
-    var NEWSLETTER_ACTION = "";
+    var NEWSLETTER_ACTION = "https://buttondown.com/api/emails/embed-subscribe/mrphilosopher";
 
     var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -897,6 +897,8 @@
       form.action = NEWSLETTER_ACTION;
       form.method = "post";
       form.target = "_blank";
+      showNote(form, "ok", "Almost there — check your inbox to confirm.");
+      setTimeout(function () { form.reset(); }, 800);
     }
 
     var forms = document.querySelectorAll("[data-signup]");
